@@ -28,7 +28,7 @@ pipeline {
         }
 
         
-     stage ('Scan and Build Jar File') {
+     stage ('Sonar') {
             steps {
                withSonarQubeEnv(installationName: 'sonar', credentialsId: 'sonar') {
                 sh 'mvn clean package sonar:sonar'
@@ -38,19 +38,9 @@ pipeline {
           
         }
 
-        stage ('Maven Test JUnit') {
-            steps {
-                echo 'hello world'
-            }
-        }
+      
         
-        
-  
-        
-        
-        
-        
-        stage("Publish to Nexus Repository Manager") {
+        stage("Publish to Nexus ") {
             steps {
                 sh 'mvn deploy'
                     }
