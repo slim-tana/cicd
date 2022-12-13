@@ -1,0 +1,42 @@
+version: '3'
+services:
+
+  exam:
+    container_name: exam
+    image: "backend_exam"
+    build: .
+    networks:
+      - test_default   
+    ports:
+      - "8089:8089"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://exam-mysql:3306/examv2thouraya?useSSL=false
+      - MYSQL_HOST=exam-mysql
+      - MYSQL_USERNAME=tana
+      - MYSQL_PASSWORD=tana
+      - MYSQL_DATABASE=examv2thouraya
+    
+    depends_on:
+      - exam-mysql
+
+  exam-mysql:
+    container_name: exam-mysql_2
+    image: "mysql:5.6"
+    environment:
+      - MYSQL_ROOT_PASSWORD=tana
+      - MYSQL_DATABASE=examv2thouraya
+      - MYSQL_USER=tana
+      - MYSQL_PASSWORD=tana
+    ports:
+      - 3307:3306
+    volumes:
+      - exam-mysql-vol:/my/own/datadir       
+    networks:
+      - test_default   
+
+   
+
+volumes:
+  exam-mysql-vol:
+networks:
+  test_default:
