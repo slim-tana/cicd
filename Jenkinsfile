@@ -11,7 +11,7 @@ pipeline {
               
                 git branch: 'main',
   
-    url: 'https://github.com/marwaahadidane/CICD.git'
+    url: 'https://github.com/slim-tana/cicd.git'
             }
         }
         stage ('Maven Clean') {
